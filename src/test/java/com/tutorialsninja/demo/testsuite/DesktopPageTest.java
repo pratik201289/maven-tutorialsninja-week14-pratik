@@ -6,6 +6,9 @@ import com.tutorialsninja.demo.testbase.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 public class DesktopPageTest extends BaseTest {
 
     DesktopPage deskTopPage = new DesktopPage();
@@ -20,7 +23,9 @@ public class DesktopPageTest extends BaseTest {
         //1.3 Select Sort By position "Name: Z to A"
         deskTopPage.setSortSelectZToA();
         //1.4 Verify the Product will arrange in Descending order
-        deskTopPage.verifyProductArrangeInDescendingOrder();
+        //deskTopPage.verifyProductArrangeInDescendingOrder();
+        Map<String, ArrayList> mapArrays = deskTopPage.verifyProductArrangeInDescendingOrder();
+        Assert.assertEquals(mapArrays.get("originalProductsName"), mapArrays.get("afterSortByZToAProductsName"));
 
     }
 
@@ -67,7 +72,6 @@ public class DesktopPageTest extends BaseTest {
         deskTopPage.selectYourCurrency();
         String expectedMessage7 = "£74.73";
         Assert.assertEquals(deskTopPage.total(), expectedMessage7, "Message is not displayed");
-
 
     }
 
