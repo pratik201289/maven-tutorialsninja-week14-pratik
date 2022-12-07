@@ -4,9 +4,7 @@ import com.tutorialsninja.demo.utility.Utility;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class DesktopPage extends Utility {
     //1.2 Click on “Show All Desktops”
@@ -30,7 +28,10 @@ public class DesktopPage extends Utility {
         selectByVisibleTextFromDropDown(selectOrderBy, "Name (Z - A)");
     }
 
-    public void verifyProductArrangeInDescendingOrder() {
+    public Map<String, ArrayList> verifyProductArrangeInDescendingOrder() {
+
+        Map<String, ArrayList> mapArrays = new HashMap<String, ArrayList>();
+
         List<WebElement> products = driver.findElements(By.xpath("//h4/a"));
         ArrayList<String> originalProductsName = new ArrayList<>();
         for (WebElement e : products) {
@@ -38,7 +39,7 @@ public class DesktopPage extends Utility {
         }
         System.out.println(originalProductsName);
         // Sort By Reverse order
-        Collections.reverse(originalProductsName);
+      //  Collections.reverse(originalProductsName);
         System.out.println(originalProductsName);
         // Select sort by Name Z - A
         selectByVisibleTextFromDropDown(By.id("input-sort"), "Name (Z - A)");
@@ -48,6 +49,16 @@ public class DesktopPage extends Utility {
         for (WebElement e : products) {
             afterSortByZToAProductsName.add(e.getText());
         }
+        //System.out.println(afterSortByZToAProductsName);
+        //mapArrays.put("originalProductsName", (ArrayList) originalProductsName);
+        //mapArrays.put("afterSortByZToAProductsName", afterSortByZToAProductsName);
+        //return mapArrays;
+       // System.out.println("Orginial Name before Sort " +originalProductsName);
+       // System.out.println("After Sort:" + afterSortByZToAProductsName);
+        mapArrays.put("originalProductsName", originalProductsName);
+        mapArrays.put("afterSortByZToAProductsName", afterSortByZToAProductsName);
+        return mapArrays;
+
     }
 
     //2.3 Select Sort By position "Name: A to Z"
