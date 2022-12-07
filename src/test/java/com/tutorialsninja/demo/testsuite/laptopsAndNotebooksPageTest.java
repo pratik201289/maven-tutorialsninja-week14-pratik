@@ -6,6 +6,9 @@ import com.tutorialsninja.demo.testbase.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 public class laptopsAndNotebooksPageTest  extends BaseTest {
 
     HomePage homePage = new HomePage();
@@ -16,6 +19,8 @@ public class laptopsAndNotebooksPageTest  extends BaseTest {
         homePage.hoverAndClickOnLaptopsAndNotebooksTab();
         laptopsAndNotebooksPage.clickOnShowAllLaptopsAndNotebooks();
         laptopsAndNotebooksPage.selectSortByPriceHighToLow();
+        Map<String, ArrayList> mapArrays = laptopsAndNotebooksPage.selectSortByPriceHighToLow();
+        Assert.assertEquals(mapArrays.get("originalProductsPrice"), mapArrays.get("afterSortByPrice"),"Not Ordered the High to low price");
     }
 
     @Test
